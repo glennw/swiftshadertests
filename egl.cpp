@@ -1,3 +1,5 @@
+#define GL_GLEXT_PROTOTYPES
+
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 #include <stdio.h>
@@ -6,7 +8,7 @@
 #include "stb_image_write.h"
 
 #define VERTEX_ARRAY    0
-#define UBO_BIND_ITEMS  5
+#define UBO_BIND_ITEMS  0
 
 struct ColorF {
   float r, g, b, a;
@@ -52,7 +54,8 @@ static const EGLint pbufferAttribs[] = {
 };
 
 const char *load(const char *filename) {
-  FILE *f = fopen(filename, "rb");
+	FILE* f;
+	fopen_s(&f, filename, "rb");
   fseek(f, 0, SEEK_END);
   int len = ftell(f);
   fseek(f, 0, SEEK_SET);
